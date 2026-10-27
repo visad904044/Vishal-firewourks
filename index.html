@@ -11,6 +11,7 @@
         header h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
         header p { font-size: 11px; color: #ffcdd2; margin-top: 2px; }
         
+        .sticky-top-block { position: sticky; top: 0; background: #f4f5f7; z-index: 100; padding: 4px 0; }
         .top-container { max-width: 900px; margin: 6px auto; padding: 0 8px; }
         .search-row { display: flex; gap: 6px; }
         .search-input { flex: 1; padding: 7px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; outline: none; background: #fff; }
@@ -76,21 +77,15 @@
         .modal-content { background: #fff; max-width: 420px; width: 100%; border-radius: 6px; max-height: 92vh; overflow-y: auto; padding: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
         .modal-title { font-size: 14px; font-weight: 700; color: #b71c1c; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 8px; display: flex; justify-content: space-between; }
         .close { cursor: pointer; font-size: 18px; color: #888; }
-        .order-summary-box { max-height: 100px; overflow-y: auto; background: #fafafa; border: 1px solid #eee; padding: 5px 8px; border-radius: 4px; margin-bottom: 8px; font-size: 11px; }
+        .order-summary-box { max-height: 110px; overflow-y: auto; background: #fafafa; border: 1px solid #eee; padding: 5px 8px; border-radius: 4px; margin-bottom: 8px; font-size: 11px; }
         .summary-line { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px dashed #eee; }
         
         .form-group { margin-bottom: 6px; }
         .form-group label { display: block; font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px; }
         .form-group input, .form-group textarea { width: 100%; padding: 6px 8px; font-size: 12px; border: 1px solid #ccc; border-radius: 4px; outline: none; }
         
-        .pay-box { background: #fff8e1; border: 1px solid #ffe082; padding: 9px; border-radius: 4px; margin-top: 8px; text-align: center; }
-        .pay-number { font-size: 14px; font-weight: 800; color: #0d47a1; background: #e3f2fd; display: inline-block; padding: 2px 8px; border-radius: 4px; margin: 2px 0; }
-        
-        .pay-buttons-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin: 8px 0; }
-        .app-pay-btn { display: flex; align-items: center; justify-content: center; padding: 7px 4px; border-radius: 4px; border: none; font-size: 11px; font-weight: 700; color: #fff; cursor: pointer; text-decoration: none; }
-        .btn-phonepe { background: #5f259f; }
-        .btn-gpay { background: #1a73e8; }
-        .btn-paytm { background: #00b9f1; color: #002e6e; }
+        .coupon-container { background: #fff8e1; border: 1px dashed #ffa000; border-radius: 4px; padding: 8px; margin: 8px 0; }
+        .coupon-title { font-size: 11px; font-weight: 700; color: #b71c1c; margin-bottom: 4px; }
         
         .btn-whatsapp { width: 100%; background: #25D366; color: #fff; border: none; padding: 10px; font-size: 13px; font-weight: 700; border-radius: 4px; margin-top: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
     </style>
@@ -101,24 +96,27 @@
         <p>✨ Roshni aur Khushiyon ka Tyohar - Apno ke sath manayein! ✨</p>
     </header>
 
-    <div class="sticky-top-block"><div class="top-container">
-        <div class="search-row">
-            <input type="text" id="search" class="search-input" placeholder="🔍 Search patakha (Anar, Rocket, 12 Shot, Ladi...)" oninput="filterList()">
-            <button class="btn-reset" onclick="resetFilters()">Reset</button>
+    <div class="sticky-top-block">
+        <div class="top-container">
+            <div class="search-row">
+                <input type="text" id="search" class="search-input" placeholder="🔍 Search patakha (Anar, Rocket, 12 Shot, Ladi...)" oninput="filterList()">
+                <button class="btn-reset" onclick="resetFilters()">Reset</button>
+            </div>
+            
+            <div class="cat-scroll" id="catBar">
+                <span class="cat-chip active" onclick="setCategory('ALL')">Sabhi (211)</span>
+                <span class="cat-chip" onclick="setCategory('Sparklers')">✨ Sparklers</span>
+                <span class="cat-chip" onclick="setCategory('Chakkar')">🌀 Chakkar</span>
+                <span class="cat-chip" onclick="setCategory('Anar / Pots')">🎆 Anar</span>
+                <span class="cat-chip" onclick="setCategory('Rockets')">🚀 Rockets</span>
+                <span class="cat-chip" onclick="setCategory('Sky Shots')">🌌 Sky Shots</span>
+                <span class="cat-chip" onclick="setCategory('Bombs')">💣 Bombs</span>
+                <span class="cat-chip" onclick="setCategory('Ladi & Bijili')">🧨 Ladi/Bijili</span>
+                <span class="cat-chip" onclick="setCategory('Kids Special')">🎈 Kids Special</span>
+                <span class="cat-chip" onclick="setCategory('Other Crackers')">📦 Others</span>
+            </div>
         </div>
-        
-        <div class="cat-scroll" id="catBar">
-            <span class="cat-chip active" onclick="setCategory('ALL')">Sabhi (211)</span>
-            <span class="cat-chip" onclick="setCategory('Sparklers')">✨ Sparklers</span>
-            <span class="cat-chip" onclick="setCategory('Chakkar')">🌀 Chakkar</span>
-            <span class="cat-chip" onclick="setCategory('Anar / Pots')">🎆 Anar</span>
-            <span class="cat-chip" onclick="setCategory('Rockets')">🚀 Rockets</span>
-            <span class="cat-chip" onclick="setCategory('Sky Shots')">🌌 Sky Shots</span>
-            <span class="cat-chip" onclick="setCategory('Bombs')">💣 Bombs</span>
-            <span class="cat-chip" onclick="setCategory('Ladi & Bijili')">🧨 Ladi/Bijili</span>
-            <span class="cat-chip" onclick="setCategory('Kids Special')">🎈 Kids Special</span>
-            <span class="cat-chip" onclick="setCategory('Other Crackers')">📦 Others</span>
-        </div></div></div>
+    </div>
 
     <div class="container">
         <div class="table-wrap">
@@ -140,44 +138,23 @@
     <div class="bottom-bar">
         <div class="bar-total">
             <span id="selectedCount">0 items</span>
-            <strong id="barTotal">₹0.00</strong>
+            <strong id="barTotal">₹0</strong>
         </div>
-        <button class="btn-order" onclick="openCheckout()">Order & Pay &raquo;</button>
+        <button class="btn-order" onclick="openCheckout()">Order Now &raquo;</button>
     </div>
 
     <div class="modal" id="orderModal">
         <div class="modal-content">
             <div class="modal-title">
-                <span>Aapka Order & Payment</span>
+                <span>Aapka Order Details</span>
                 <span class="close" onclick="closeCheckout()">&times;</span>
             </div>
 
             <div class="order-summary-box" id="orderSummary"></div>
 
-            <div style="display:flex; gap:6px; margin-bottom:8px;">
-                <input type="text" id="couponInput" placeholder="Coupon code daalein (e.g. 10diwali)" style="flex:1; padding:6px 8px; font-size:11px; border:1px dashed #d32f2f; border-radius:4px; outline:none; text-transform:uppercase; background:#fff;">
-                <button type="button" onclick="applyCoupon()" style="padding:6px 12px; background:#b71c1c; color:#fff; border:none; border-radius:4px; font-size:11px; font-weight:700; cursor:pointer;">Apply</button>
-            </div>
-            <div id="couponMsg" style="font-size:11px; margin-bottom:8px; display:none;"></div>
-
-            <div style="background:#f9f9f9; padding:6px 8px; border-radius:4px; margin-bottom:8px; font-size:12px;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:3px; color:#555;">
-                    <span>Subtotal:</span>
-                    <span id="modalSubtotal">₹0.00</span>
-                </div>
-                <div id="discountRow" style="display:none; justify-content:space-between; margin-bottom:3px; color:#2e7d32; font-weight:600;">
-                    <span>Discount:</span>
-                    <span id="modalDiscount">-₹0.00</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; font-weight:700; font-size:13px; border-top:1px solid #ddd; padding-top:4px;">
-                    <span>Total Amount:</span>
-                    <span style="color:#b71c1c;" id="modalTotal">₹0.00</span>
-                </div>
-            </div>
-
             <div class="form-group">
                 <label>Customer Name *</label>
-                <input type="text" id="custName" placeholder="Apna naam likhein">
+                <input type="text" id="custName" placeholder="Apna pura naam likhein">
             </div>
             <div class="form-group">
                 <label>Mobile Number *</label>
@@ -188,25 +165,42 @@
                 <textarea id="custAddress" rows="2" placeholder="Ghar ka pata ya area"></textarea>
             </div>
 
-            <div class="pay-box">
-                <div style="font-size:11px; color:#555;">Payment Number (GPay / PhonePe / Paytm):</div>
-                <div class="pay-number">7008693610</div>
+            <!-- Coupon Box -->
+            <div class="coupon-container">
+                <div class="coupon-title">🏷️ Special Coupon Code</div>
+                <div style="display:flex; gap:6px;">
+                    <input type="text" id="couponInput" placeholder="Coupon daalein (e.g. NIT20)" style="flex:1; padding:6px 8px; font-size:11px; border:1px solid #ccc; border-radius:4px; outline:none; text-transform:uppercase; background:#fff;">
+                    <button type="button" onclick="applyCoupon()" style="padding:6px 12px; background:#b71c1c; color:#fff; border:none; border-radius:4px; font-size:11px; font-weight:700; cursor:pointer;">Apply</button>
+                </div>
+                <div id="couponMsg" style="font-size:11px; margin-top:5px; display:none;"></div>
+            </div>
 
-                <div style="font-size:11px; font-weight:600; color:#bf360c; margin-top:6px;">Direct Pay Button (Click to Open App):</div>
-                <div class="pay-buttons-grid">
-                    <a id="linkPhonePe" href="#" class="app-pay-btn btn-phonepe">📱 PhonePe</a>
-                    <a id="linkGPay" href="#" class="app-pay-btn btn-gpay">⚡ GPay</a>
-                    <a id="linkPaytm" href="#" class="app-pay-btn btn-paytm">💳 Paytm / UPI</a>
+            <!-- Bill Totals -->
+            <div style="background:#f9f9f9; padding:6px 8px; border-radius:4px; margin-bottom:8px; font-size:12px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:3px; color:#555;">
+                    <span>Order Subtotal:</span>
+                    <span id="modalSubtotal">₹0</span>
+                </div>
+                <div id="discountRow" style="display:none; justify-content:space-between; margin-bottom:3px; color:#2e7d32; font-weight:600;">
+                    <span>Total Discount:</span>
+                    <span id="modalDiscount">-₹0</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-weight:700; font-size:13px; border-top:1px solid #ddd; padding-top:4px;">
+                    <span>Final Payable Total:</span>
+                    <span style="color:#b71c1c;" id="modalTotal">₹0</span>
                 </div>
             </div>
 
-            <button class="btn-whatsapp" onclick="sendOrderToWhatsApp()">
-                <span>💬 WhatsApp Par Order Confirm Karein</span>
+            <button class="btn-whatsapp" id="btnSubmitOrder" onclick="processAndSendOrder()">
+                <span>💬 WhatsApp Par Order Send Karein</span>
             </button>
         </div>
     </div>
 
     <script>
+        // GOOGLE APPS SCRIPT WEB APP URL YAHAN PASTE KAREIN
+        const GOOGLE_SHEET_WEBAPP_URL = ""; 
+
         const products = [{"id": 1, "name": "7CM ELECTRIC(RAMS)", "price": 30.0, "category": "Sparklers"}, {"id": 2, "name": "7CM 50/50 (RAMS)", "price": 40.0, "category": "Other Crackers"}, {"id": 3, "name": "7CM CRACK(RAMS)", "price": 40.0, "category": "Other Crackers"}, {"id": 4, "name": "7CM RED(RAMS)", "price": 40.0, "category": "Other Crackers"}, {"id": 5, "name": "10CM CRACKLING (CLSC)", "price": 40.0, "category": "Sparklers"}, {"id": 6, "name": "10CM GREEN(CLSSC)", "price": 30.0, "category": "Sparklers"}, {"id": 7, "name": "10CM RED(CLSSC)", "price": 40.0, "category": "Sparklers"}, {"id": 8, "name": "12CM ELECTRIC(CLSSC)", "price": 40.0, "category": "Sparklers"}, {"id": 9, "name": "12CM CRACKLING (CLSSC)", "price": 40.0, "category": "Sparklers"}, {"id": 10, "name": "12 CM GREEN (RAMS)", "price": 70.0, "category": "Other Crackers"}, {"id": 11, "name": "12CM RED (RAMS)", "price": 70.0, "category": "Other Crackers"}, {"id": 12, "name": "15 CM ELE(CLSSC)", "price": 60.0, "category": "Sparklers"}, {"id": 13, "name": "15CM ELECTRIC(RAMS)", "price": 70.0, "category": "Sparklers"}, {"id": 14, "name": "15 CM CRACKLING(CLSSC)", "price": 60.0, "category": "Sparklers"}, {"id": 15, "name": "15 CM GREEN(CLSSC)", "price": 60.0, "category": "Sparklers"}, {"id": 16, "name": "15CM RED(CLSSC)", "price": 70.0, "category": "Sparklers"}, {"id": 17, "name": "30CM ELE(CLSSC)", "price": 60.0, "category": "Sparklers"}, {"id": 18, "name": "30CM CRACKLING (CLSSC)", "price": 60.0, "category": "Sparklers"}, {"id": 19, "name": "30CM GREEN(CLSSC)", "price": 60.0, "category": "Sparklers"}, {"id": 20, "name": "30CM RED(CLSSC)", "price": 70.0, "category": "Sparklers"}, {"id": 21, "name": "50CM ELECTRIC(RAMS)", "price": 260.0, "category": "Sparklers"}, {"id": 22, "name": "50CM CRACKLING(RAMS)", "price": 310.0, "category": "Sparklers"}, {"id": 23, "name": "100CM ELECTRIC(CLSSC)", "price": 620.0, "category": "Sparklers"}, {"id": 24, "name": "LAZER SHOW(VN)", "price": 400.0, "category": "Other Crackers"}, {"id": 25, "name": "ONE TIME PAASWORD (VN)", "price": 230.0, "category": "Other Crackers"}, {"id": 26, "name": "SPINNER CLUB(VN)", "price": 360.0, "category": "Chakkar"}, {"id": 27, "name": "SPINNER DELUXE(VN)", "price": 500.0, "category": "Chakkar"}, {"id": 28, "name": "SPINNER MIX(VN)", "price": 420.0, "category": "Chakkar"}, {"id": 29, "name": "SPINNER SPECIAL(VN)", "price": 440.0, "category": "Chakkar"}, {"id": 30, "name": "SPINNER SUPER DELUXE(VN)", "price": 580.0, "category": "Chakkar"}, {"id": 31, "name": "SPINNER WORLD(VN)", "price": 400.0, "category": "Chakkar"}, {"id": 32, "name": "COLOUR SPINNER COMBO(VN)", "price": 380.0, "category": "Chakkar"}, {"id": 33, "name": "GROUND CHAKKAR BIG PLASTIC(LIYA)", "price": 90.0, "category": "Chakkar"}, {"id": 34, "name": "GROUND CHAKKAR BIG 25 PC(VISHNU)", "price": 170.0, "category": "Chakkar"}, {"id": 35, "name": "GROUND CHAKKAR DLX(VISHNU)", "price": 290.0, "category": "Chakkar"}, {"id": 36, "name": "GROUND CHAKKAR SPECIAL(KAMA)", "price": 120.0, "category": "Chakkar"}, {"id": 37, "name": "GROUND CHAKKAR BIG 10 PC(KAMA)", "price": 70.0, "category": "Chakkar"}, {"id": 38, "name": "GROUND CHAKKAR DELUXE (KAMA)", "price": 240.0, "category": "Chakkar"}, {"id": 39, "name": "GROUND CHAKKAR SPL(YESBRO)", "price": 170.0, "category": "Chakkar"}, {"id": 40, "name": "GROUND CHAKKAR DELUXE (YESBRO)", "price": 310.0, "category": "Chakkar"}, {"id": 41, "name": "WIN WHEEL MAX(YES BRO)", "price": 350.0, "category": "Chakkar"}, {"id": 42, "name": "WIN WHEEL SUPER(YESBRO)", "price": 440.0, "category": "Chakkar"}, {"id": 43, "name": "GROUND CHAKKAR DELUXE(SS)", "price": 280.0, "category": "Chakkar"}, {"id": 44, "name": "GROUND CHAKKAR SPECIAL(SS)", "price": 170.0, "category": "Chakkar"}, {"id": 45, "name": "45 CM GROUND CHAKKAR (COCK)", "price": 320.0, "category": "Chakkar"}, {"id": 46, "name": "70CM GROUND CHAKKAR (COCK)", "price": 540.0, "category": "Chakkar"}, {"id": 47, "name": "WHISTLING WHEEL(COCK)", "price": 320.0, "category": "Chakkar"}, {"id": 48, "name": "FLOWERPOT BIG(COCK)", "price": 320.0, "category": "Anar / Pots"}, {"id": 49, "name": "FLOWERPOT DELUXE (COCK)", "price": 760.0, "category": "Anar / Pots"}, {"id": 50, "name": "FLOWERPOT SPL(COCK)", "price": 570.0, "category": "Anar / Pots"}, {"id": 51, "name": "FLOWERPOT SPECIAL(SS)", "price": 230.0, "category": "Anar / Pots"}, {"id": 52, "name": "FLOWERPOT ASHOKA(SS)", "price": 290.0, "category": "Anar / Pots"}, {"id": 53, "name": "COLOURKOTI (SS)", "price": 430.0, "category": "Anar / Pots"}, {"id": 54, "name": "RANGEELA(SS)", "price": 450.0, "category": "Other Crackers"}, {"id": 55, "name": "FLOWERPOT SPECIAL(YESBRO)", "price": 250.0, "category": "Anar / Pots"}, {"id": 56, "name": "FLOWERPOT GAINT(YB)", "price": 430.0, "category": "Anar / Pots"}, {"id": 57, "name": "COLOURKOTI (YB)", "price": 550.0, "category": "Anar / Pots"}, {"id": 58, "name": "COLOURKOTI RED(YESBRO)", "price": 690.0, "category": "Anar / Pots"}, {"id": 59, "name": "COLOURKOTI DELUXE (YESBRO)", "price": 920.0, "category": "Anar / Pots"}, {"id": 60, "name": "FLOWERPOT RAPID (VN)", "price": 1330.0, "category": "Anar / Pots"}, {"id": 61, "name": "COLOUR CONE(VN)", "price": 1250.0, "category": "Anar / Pots"}, {"id": 62, "name": "DON WORLD(VN)", "price": 1490.0, "category": "Other Crackers"}, {"id": 63, "name": "COLOUR WORLD (VN)", "price": 1630.0, "category": "Other Crackers"}, {"id": 64, "name": "FLOWERPOT SMALL(KAMA)", "price": 110.0, "category": "Anar / Pots"}, {"id": 65, "name": "FLOWERPOT SPECIAL(KAMA)", "price": 140.0, "category": "Anar / Pots"}, {"id": 66, "name": "FLOWERPOT ASHOKA (KAMA)", "price": 200.0, "category": "Anar / Pots"}, {"id": 67, "name": "COLORKOTI (KAMA)", "price": 350.0, "category": "Anar / Pots"}, {"id": 68, "name": "FLOWERPOT BIG(VISHNU)", "price": 130.0, "category": "Anar / Pots"}, {"id": 69, "name": "FLOWERPOT SPL(VISHNU)", "price": 190.0, "category": "Anar / Pots"}, {"id": 70, "name": "FLOWERPOT ASHOKA (VISHNU)", "price": 240.0, "category": "Anar / Pots"}, {"id": 71, "name": "COLOUR KOTI (VISHNU)", "price": 400.0, "category": "Anar / Pots"}, {"id": 72, "name": "COLOURKOTI (SPCL)", "price": 400.0, "category": "Anar / Pots"}, {"id": 73, "name": "COLOURKOTI (EVE)", "price": 880.0, "category": "Anar / Pots"}, {"id": 74, "name": "FLOWERPOT GAINT(STD)", "price": 720.0, "category": "Anar / Pots"}, {"id": 75, "name": "FLOWERPOT DELUXE 2PC(VD)", "price": 210.0, "category": "Anar / Pots"}, {"id": 76, "name": "GREEN BERRY MEGA ANAR (SONNY)", "price": 1630.0, "category": "Anar / Pots"}, {"id": 77, "name": "PEACOCK MULTICOLOUR", "price": 430.0, "category": "Kids Special"}, {"id": 78, "name": "MINION(STARINDIYA)", "price": 200.0, "category": "Other Crackers"}, {"id": 79, "name": "ANGRY BIRD(STAR INDIYA)", "price": 200.0, "category": "Other Crackers"}, {"id": 80, "name": "BIJILI GOLD 50 PC", "price": 40.0, "category": "Ladi & Bijili"}, {"id": 81, "name": "BUILI 50PC(WHITE)", "price": 30.0, "category": "Other Crackers"}, {"id": 82, "name": "GOLD BIJILI STRIPPED50PC(SS)", "price": 60.0, "category": "Ladi & Bijili"}, {"id": 83, "name": "BIJILI RED 100 PC(LC)", "price": 80.0, "category": "Ladi & Bijili"}, {"id": 84, "name": "GOLD BIJILI STRIPPED 100PC(SS)", "price": 100.0, "category": "Ladi & Bijili"}, {"id": 85, "name": "BULLET BOMB(GEMS)", "price": 50.0, "category": "Bombs"}, {"id": 86, "name": "BULLET SMALL", "price": 30.0, "category": "Bombs"}, {"id": 87, "name": "BULLET BOMB(SS)", "price": 70.0, "category": "Bombs"}, {"id": 88, "name": "BULLET BOMB DELUXE(SS)", "price": 100.0, "category": "Bombs"}, {"id": 89, "name": "MEGA BULLET(SS)", "price": 140.0, "category": "Bombs"}, {"id": 90, "name": "KING OF KING BOMB", "price": 250.0, "category": "Bombs"}, {"id": 91, "name": "BOOM BOMB (STANDARD)", "price": 380.0, "category": "Bombs"}, {"id": 92, "name": "PARTY CANDLE(SS)", "price": 240.0, "category": "Kids Special"}, {"id": 93, "name": "1.5\" RASSI (STD)", "price": 90.0, "category": "Bombs"}, {"id": 94, "name": "1.5 RASSI (MAHA)", "price": 50.0, "category": "Bombs"}, {"id": 95, "name": "1.5FT RAASSI (VGR)", "price": 50.0, "category": "Other Crackers"}, {"id": 96, "name": "4FT RASSI(JYOTHI)", "price": 160.0, "category": "Bombs"}, {"id": 97, "name": "PULLING THREAD", "price": 10.0, "category": "Kids Special"}, {"id": 98, "name": "COLOURFLASH (VN)", "price": 440.0, "category": "Other Crackers"}, {"id": 99, "name": "2 SOUND CRACKER(JAYA)", "price": 50.0, "category": "Bombs"}, {"id": 100, "name": "SNAKE TABLET", "price": 490.0, "category": "Kids Special"}, {"id": 101, "name": "1000 WALA(ONE)", "price": 340.0, "category": "Ladi & Bijili"}, {"id": 102, "name": "2000 WALA(ONE)", "price": 680.0, "category": "Ladi & Bijili"}, {"id": 103, "name": "5000 WALA(ONE)", "price": 1690.0, "category": "Ladi & Bijili"}, {"id": 104, "name": "10000 WALA(ONE)", "price": 3380.0, "category": "Ladi & Bijili"}, {"id": 105, "name": "GANGA JAMUNA (SHINE STAR)", "price": 100.0, "category": "Other Crackers"}, {"id": 106, "name": "GANGA JAMUNA SPL (RAMA)", "price": 170.0, "category": "Other Crackers"}, {"id": 107, "name": "FLOWER BOMB(STD)", "price": 300.0, "category": "Bombs"}, {"id": 108, "name": "CHUTU PUTU (SS)", "price": 140.0, "category": "Kids Special"}, {"id": 109, "name": "SUN DROP(SS)", "price": 180.0, "category": "Kids Special"}, {"id": 110, "name": "MOON DROP(SS)", "price": 170.0, "category": "Kids Special"}, {"id": 111, "name": "STARDROP(SS)", "price": 170.0, "category": "Kids Special"}, {"id": 112, "name": "COCKTAIL FOUNTAIN(SS)", "price": 940.0, "category": "Anar / Pots"}, {"id": 113, "name": "7 SHOTS(SS)", "price": 240.0, "category": "Sky Shots"}, {"id": 114, "name": "7 SHOTS(STD)", "price": 320.0, "category": "Sky Shots"}, {"id": 115, "name": "7 SHOTS (UV BOX)", "price": 190.0, "category": "Sky Shots"}, {"id": 116, "name": "PANCH AWTHAR(CORO)", "price": 440.0, "category": "Other Crackers"}, {"id": 117, "name": "PAANDAV (STD)", "price": 390.0, "category": "Other Crackers"}, {"id": 118, "name": "7 SHOTS (YES BRO)", "price": 280.0, "category": "Sky Shots"}, {"id": 119, "name": "ROBO MIX(SS)", "price": 270.0, "category": "Other Crackers"}, {"id": 120, "name": "NASA ROCKET(SS)", "price": 140.0, "category": "Rockets"}, {"id": 121, "name": "LUNIK ROCKET(VISHNU)", "price": 230.0, "category": "Rockets"}, {"id": 122, "name": "LUNIK ROCKET(COCK)", "price": 560.0, "category": "Rockets"}, {"id": 123, "name": "LUNIK ROCKET(SS)", "price": 290.0, "category": "Rockets"}, {"id": 124, "name": "M12 ROCKET(SS)", "price": 290.0, "category": "Rockets"}, {"id": 125, "name": "FX3 ROCKET(SS)", "price": 320.0, "category": "Rockets"}, {"id": 126, "name": "RAJDHANI ROCKET(SS)", "price": 360.0, "category": "Rockets"}, {"id": 127, "name": "CRACKLING LUNIK ROCKET(SS/VD)", "price": 390.0, "category": "Rockets"}, {"id": 128, "name": "BABY ROCKET(VISHNU)", "price": 90.0, "category": "Rockets"}, {"id": 129, "name": "ROCKET BOMB (VISHNU)", "price": 130.0, "category": "Rockets"}, {"id": 130, "name": "2 SOUND ROCKET(VISHNU)", "price": 220.0, "category": "Rockets"}, {"id": 131, "name": "3 SOUND ROCKET(VISHNU)", "price": 230.0, "category": "Rockets"}, {"id": 132, "name": "TOPAZ ROCKET(CORO)", "price": 250.0, "category": "Rockets"}, {"id": 133, "name": "RAINBOW ROCKET(STD)", "price": 280.0, "category": "Rockets"}, {"id": 134, "name": "ROHINI ROCKET(STD)", "price": 520.0, "category": "Rockets"}, {"id": 135, "name": "WHISTLING ROCKET(SHANA)", "price": 370.0, "category": "Rockets"}, {"id": 136, "name": "2 SOUND BOMB (LAVYANA)", "price": 60.0, "category": "Bombs"}, {"id": 137, "name": "POWERPOINT (VN)", "price": 1020.0, "category": "Other Crackers"}, {"id": 138, "name": "TOP CODE(VN)", "price": 920.0, "category": "Other Crackers"}, {"id": 139, "name": "6 SINGLE BOMB", "price": 100.0, "category": "Bombs"}, {"id": 140, "name": "5\" SINGLE SOUND CRACKER", "price": 90.0, "category": "Bombs"}, {"id": 141, "name": "4.5\" SINGLE SOUND CRACKER", "price": 80.0, "category": "Bombs"}, {"id": 142, "name": "BUTTERFLY(ARYAN)", "price": 140.0, "category": "Kids Special"}, {"id": 143, "name": "BUTTERFLY(RIO)", "price": 130.0, "category": "Kids Special"}, {"id": 144, "name": "4 COLOUR PENCIL(STD)", "price": 480.0, "category": "Other Crackers"}, {"id": 145, "name": "HELICOPTER(AMAN)", "price": 250.0, "category": "Kids Special"}, {"id": 146, "name": "BUTTERFLY(VISHNU)", "price": 250.0, "category": "Kids Special"}, {"id": 147, "name": "BAMBARA (VISHNU)", "price": 270.0, "category": "Other Crackers"}, {"id": 148, "name": "DRONE (VISHNU)", "price": 280.0, "category": "Kids Special"}, {"id": 149, "name": "DRONE(CORO)", "price": 390.0, "category": "Kids Special"}, {"id": 150, "name": "CRACKLING TREE (MERCURY)", "price": 950.0, "category": "Other Crackers"}, {"id": 151, "name": "CIGRATE BOMB", "price": 240.0, "category": "Bombs"}, {"id": 152, "name": "WONDER THROW", "price": 300.0, "category": "Other Crackers"}, {"id": 153, "name": "KITE", "price": 40.0, "category": "Kids Special"}, {"id": 154, "name": "KITKAT", "price": 50.0, "category": "Kids Special"}, {"id": 155, "name": "CHITPUT (VISHNU/LC)", "price": 130.0, "category": "Kids Special"}, {"id": 156, "name": "BAMBARA (LC)", "price": 200.0, "category": "Other Crackers"}, {"id": 157, "name": "28 CHORSA SPL", "price": 40.0, "category": "Ladi & Bijili"}, {"id": 158, "name": "28 GAINT MBR", "price": 50.0, "category": "Other Crackers"}, {"id": 159, "name": "24 DLX MBR", "price": 90.0, "category": "Ladi & Bijili"}, {"id": 160, "name": "24 DLX SPL", "price": 90.0, "category": "Ladi & Bijili"}, {"id": 161, "name": "50 DLX SPL", "price": 200.0, "category": "Ladi & Bijili"}, {"id": 162, "name": "100 DLX", "price": 440.0, "category": "Ladi & Bijili"}, {"id": 163, "name": "1000 WALA (SPCL)", "price": 730.0, "category": "Ladi & Bijili"}, {"id": 164, "name": "12 STAR (SS)", "price": 460.0, "category": "Sky Shots"}, {"id": 165, "name": "12 SHOT(COCK)", "price": 550.0, "category": "Sky Shots"}, {"id": 166, "name": "12 SHOT(JAWA)", "price": 270.0, "category": "Sky Shots"}, {"id": 167, "name": "12 SHOT POPEYE (SONNY)", "price": 990.0, "category": "Sky Shots"}, {"id": 168, "name": "12 SHOTS SILVER ARMY (SONY)", "price": 540.0, "category": "Sky Shots"}, {"id": 169, "name": "16 COLOUR PAPER SHOT(STD)", "price": 950.0, "category": "Sky Shots"}, {"id": 170, "name": "12 SHOT MUSICZ RIP(NYAGI)", "price": 950.0, "category": "Sky Shots"}, {"id": 171, "name": "15 MULTICOLOUR SHOTS (JAWA)", "price": 640.0, "category": "Sky Shots"}, {"id": 172, "name": "30 MULTICOLOUR SHOTS (JAWA)", "price": 1050.0, "category": "Sky Shots"}, {"id": 173, "name": "30 MULTICOLOUR SHOTS (VINAYAK)", "price": 1250.0, "category": "Sky Shots"}, {"id": 174, "name": "30 MULTI COLOUR SHOTS (LIYA)", "price": 1380.0, "category": "Sky Shots"}, {"id": 175, "name": "SKY SHOW 30 SHOTS(SS)", "price": 1430.0, "category": "Sky Shots"}, {"id": 176, "name": "60 MULTICOLOUR SHOTS (JAWA)", "price": 2000.0, "category": "Sky Shots"}, {"id": 177, "name": "60 MULTICOLOUR SHOTS (VINAYAK)", "price": 2250.0, "category": "Sky Shots"}, {"id": 178, "name": "100 MULTI COLOUR SHOTS HOT N SPICY(SS)", "price": 3850.0, "category": "Sky Shots"}, {"id": 179, "name": "100 MULTICOLOUR SHOTS ULTRA DELUX(SS)", "price": 4000.0, "category": "Sky Shots"}, {"id": 180, "name": "120 MULTICOLOUR SHOTS (JAWA)", "price": 4000.0, "category": "Sky Shots"}, {"id": 181, "name": "120 MULTICOLOUR SHOTS (VINAYAK)", "price": 4400.0, "category": "Sky Shots"}, {"id": 182, "name": "120 MULTICOLOUR SHOTS STAR SHOW (SS)", "price": 4350.0, "category": "Sky Shots"}, {"id": 183, "name": "240 MULTICOLOUR SHOTS (JAWA)", "price": 7250.0, "category": "Sky Shots"}, {"id": 184, "name": "10*10 MULTI COLOUR(LIYA)", "price": 8750.0, "category": "Other Crackers"}, {"id": 185, "name": "12 STEP 4\" PIPE(LIYA)", "price": 800.0, "category": "Sky Shots"}, {"id": 186, "name": "SNAKE EYE 6\" PIPE(VN)", "price": 4000.0, "category": "Sky Shots"}, {"id": 187, "name": "2\" 3 PC PIPE (JAWA)", "price": 490.0, "category": "Sky Shots"}, {"id": 188, "name": "2\" SINGLE PIPE (JAWA)", "price": 190.0, "category": "Sky Shots"}, {"id": 189, "name": "2\" SINGLE PIPE MIX(STD)", "price": 250.0, "category": "Sky Shots"}, {"id": 190, "name": "3.5\" PIPE MIX(NSV)", "price": 730.0, "category": "Sky Shots"}, {"id": 191, "name": "3.5\" SINGLE UV PIPE(JAWA)", "price": 630.0, "category": "Sky Shots"}, {"id": 192, "name": "3.5\" PIPE(INF)", "price": 990.0, "category": "Sky Shots"}, {"id": 193, "name": "3.5 PIPE MIX(COCK)", "price": 1200.0, "category": "Sky Shots"}, {"id": 194, "name": "BLOSSOM(COCK)", "price": 1080.0, "category": "Sky Shots"}, {"id": 195, "name": "GREEN COSCO(COCK)", "price": 1150.0, "category": "Sky Shots"}, {"id": 196, "name": "TRIPLE TREAT (INF)", "price": 2750.0, "category": "Other Crackers"}, {"id": 197, "name": "ROLLER COASTER 4\" 2PC PIPE(ANIL)", "price": 2450.0, "category": "Sky Shots"}, {"id": 198, "name": "SPIDERMAN 4\" PIPE 2PC(LIMA)", "price": 1950.0, "category": "Sky Shots"}, {"id": 199, "name": "POP POP 25PC DANA", "price": 20.0, "category": "Kids Special"}, {"id": 200, "name": "POP POP 35 DANA", "price": 30.0, "category": "Kids Special"}, {"id": 201, "name": "POP POP PRIME", "price": 20.0, "category": "Kids Special"}, {"id": 202, "name": "Top Tiger NO6 SPL", "price": 370.0, "category": "Bombs"}, {"id": 203, "name": "Top Tiger NO 5 SPCL", "price": 350.0, "category": "Bombs"}, {"id": 204, "name": "Top Tiger NO 4 SPL", "price": 320.0, "category": "Bombs"}, {"id": 205, "name": "Top Tiger NO 3", "price": 240.0, "category": "Bombs"}, {"id": 206, "name": "Top Tiger NO 2", "price": 200.0, "category": "Bombs"}, {"id": 207, "name": "SHORSHER NO 6 SPL", "price": 430.0, "category": "Bombs"}, {"id": 208, "name": "SHORSHER NOS", "price": 400.0, "category": "Bombs"}, {"id": 209, "name": "SIMMBA NO 6", "price": 570.0, "category": "Bombs"}, {"id": 210, "name": "CHEETAH NO 10 SPL", "price": 620.0, "category": "Bombs"}, {"id": 211, "name": "ELEPHANT BOMB", "price": 620.0, "category": "Bombs"}];
         const quantities = {};
         let currentCat = 'ALL';
@@ -316,6 +310,7 @@
         const coupons = {
             "10DIWALI": { type: "percent", value: 10, label: "10% Discount applied!" },
             "DIWALI20": { type: "percent", value: 20, label: "20% Discount applied!" },
+            "NIT20": { type: "percent", value: 20, label: "20% Discount applied!" },
             "GHOSTRIDER": { type: "percent", value: 30, label: "30% Discount applied!" }
         };
 
@@ -323,7 +318,7 @@
             return Math.max(0, rawSubtotal - discountAmount);
         }
 
-        function refreshPaymentDetails() {
+        function refreshBillSummary() {
             const finalPayable = calculateFinalPayable();
             document.getElementById('modalSubtotal').innerText = `₹${rawSubtotal.toFixed(0)}`;
             document.getElementById('modalTotal').innerText = `₹${finalPayable.toFixed(0)}`;
@@ -335,24 +330,18 @@
             } else {
                 discRow.style.display = 'none';
             }
-
-            const upiString = `upi://pay?pa=7008693610@ybl&pn=Vishal%2520Fireworks&am=${finalPayable.toFixed(0)}&cu=INR&tn=Vishal%2520Fireworks%2520Order`;
-            
-            document.getElementById('linkPhonePe').href = upiString;
-            document.getElementById('linkGPay').href = upiString;
-            document.getElementById('linkPaytm').href = upiString;
         }
 
         function applyCoupon() {
             const input = document.getElementById('couponInput');
             const code = input.value.trim().toUpperCase();
-            const msgEl =document.getElementById('couponMsg');
+            const msgEl = document.getElementById('couponMsg');
 
             if (!code) {
                 discountAmount = 0;
                 appliedCouponCode = "";
                 msgEl.style.display = 'none';
-                refreshPaymentDetails();
+                refreshBillSummary();
                 return;
             }
 
@@ -371,7 +360,7 @@
                 appliedCouponCode = "";
             }
 
-            refreshPaymentDetails();
+            refreshBillSummary();
         }
 
         function openCheckout() {
@@ -406,7 +395,7 @@
                 appliedCouponCode = "";
                 const msgEl = document.getElementById('couponMsg');
                 if (msgEl) msgEl.style.display = 'none';
-                refreshPaymentDetails();
+                refreshBillSummary();
             }
 
             document.getElementById('orderModal').style.display = 'flex';
@@ -416,7 +405,22 @@
             document.getElementById('orderModal').style.display = 'none';
         }
 
-        function sendOrderToWhatsApp() {
+        // Sabhi Orders ka record Sheet me bhejne ka function
+        async function recordOrderToSheet(payload) {
+            if (!GOOGLE_SHEET_WEBAPP_URL) return;
+            try {
+                await fetch(GOOGLE_SHEET_WEBAPP_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.error("Order logging failed:", err);
+            }
+        }
+
+        async function processAndSendOrder() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
             const address = document.getElementById('custAddress').value.trim();
@@ -426,9 +430,17 @@
                 return;
             }
 
+            const phoneDigits = phone.replace(/[^0-9]/g, '');
+            if (phoneDigits.length < 10) {
+                alert('Kripya sahi 10-digit mobile number enter karein!');
+                return;
+            }
+
             const selectedIds = Object.keys(quantities);
             const finalPayable = calculateFinalPayable();
 
+            // WhatsApp Message aur Items Summary banana
+            let itemsSummaryList = [];
             let msg = `💥 *VISHAL FIREWORKS - NEW ORDER* 💥\n`;
             msg += `--------------------------------\n`;
             msg += `👤 *Customer Name:* ${name}\n`;
@@ -442,17 +454,45 @@
                 const q = quantities[id];
                 const sub = q * p.price;
                 msg += `${idx + 1}. *${p.name}* x ${q} = ₹${sub.toFixed(0)}\n`;
+                itemsSummaryList.push(`${p.name} (x${q})`);
             });
 
             msg += `--------------------------------\n`;
             msg += `Subtotal: ₹${rawSubtotal.toFixed(0)}\n`;
             if (discountAmount > 0) {
-                msg += `Discount (${appliedCouponCode}): -₹${discountAmount.toFixed(0)}\n`;
+                msg += `🏷️ *Coupon:* ${appliedCouponCode} (-₹${discountAmount.toFixed(0)})\n`;
+            } else {
+                msg += `Discount: ₹0\n`;
             }
             msg += `💰 *TOTAL PAYABLE: ₹${finalPayable.toFixed(0)}*\n`;
-            msg += `💳 *Paid via UPI:* 7008693610\n`;
+            msg += `--------------------------------\n`;
             msg += `Kripya mera order pack karein aur confirm karein! 🙏✨`;
 
+            // Data Sheet ke format me
+            const orderPayload = {
+                name: name,
+                phone: phone,
+                address: address,
+                subtotal: rawSubtotal,
+                coupon: appliedCouponCode || "NONE",
+                discount: discountAmount,
+                finalTotal: finalPayable,
+                itemsSummary: itemsSummaryList.join(", ")
+            };
+
+            // Button disable karke processing indicate karna
+            const btn = document.getElementById('btnSubmitOrder');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "<span>⏳ Sending Order...</span>";
+            btn.disabled = true;
+
+            // Sheet me save karega (Coupon lagaya ho ya na lagaya ho)
+            await recordOrderToSheet(orderPayload);
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+
+            // WhatsApp redirect
             const waUrl = `https://wa.me/917008693610?text=${encodeURIComponent(msg)}`;
             window.location.href = waUrl;
         }
